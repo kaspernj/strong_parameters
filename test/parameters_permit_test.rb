@@ -346,4 +346,12 @@ class NestedParametersTest < ActiveSupport::TestCase
       assert !hash.permitted?
     end
   end
+
+  test 'that attributes key as integers works' do
+    params = ActionController::Parameters.new("test" => {"test_attributes" => {1 => {"id" => "id1"}}})
+    permitted = params.require(:test).permit(test_attributes: [:id])
+
+    assert_equal 1, permitted["test_attributes"].length
+    assert_equal "id1", permitted["test_attributes"][1]["id"]
+  end
 end
