@@ -347,7 +347,7 @@ class NestedParametersTest < ActiveSupport::TestCase
     end
   end
 
-  test 'that attributes key as integers works' do
+  test 'that attribute keys as integers works' do
     params = ActionController::Parameters.new("test" => {"test_attributes" => {1 => {"id" => "id1"}}})
     permitted = params.require(:test).permit(test_attributes: [:id])
 
